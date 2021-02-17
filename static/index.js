@@ -50,3 +50,6 @@ function clearArea() {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
+
+
+//code found from https://www.codicode.com/art/how_to_draw_on_a_html5_canvas_with_a_mouse.aspx
