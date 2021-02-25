@@ -2,6 +2,7 @@ alert("Hello, world!");
 
 function setup() {
     createCanvas(400,400);
+    rect(0,0, 400,400)
 }
 
 function draw() {
