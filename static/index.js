@@ -1,8 +1,10 @@
 alert("Hello, world!");
 
 function setup() {
-    createCanvas(400,400);
+    let canvas = createCanvas(400,400);
+    canvas.id("canvas")
     rect(0,0, 400,400)
+
 }
 
 function draw() {
@@ -15,5 +17,7 @@ function draw() {
 function clearArea() {
     // Use the identity matrix while clearing the canvas
     clear();
-    background(255);
+    c = color(255,255,255)
+    fill(c);
+    rect(0,0,400,400);
 }
