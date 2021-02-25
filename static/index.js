@@ -13,7 +13,7 @@ function setup() {
     createCanvas(400,400);
 }
 
-function Draw(x, y, isDown) {
+function draw() {
     if (mouseIsPressed) {
         fill(0);
         ellipse(mouseX,mouseY,20,20);
