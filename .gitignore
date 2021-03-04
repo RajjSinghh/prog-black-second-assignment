@@ -1,2 +1,5 @@
 project
 __pycache__
+.ipynb_checkpoints
+data
+saved_models
