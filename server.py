@@ -6,8 +6,13 @@ import tensorflow as tf
 app = flask.Flask(__name__)
 
 @app.route("/")
-def hello_world():
+def serve():
     return flask.render_template("index.html")
 
+@app.route("/send/image", methods=["POST"])
+def image():
+    print(flask.request.json)
+
 if __name__ == "__main__":
+    model = tf.keras.models.load_model("saved_models/dnn.h5")
     app.run()
