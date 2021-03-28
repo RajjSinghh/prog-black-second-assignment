@@ -10,8 +10,8 @@ def serve():
     return flask.render_template("index.html")
 
 @app.route("/send/image", methods=["POST"])
-def image():
-    print(flask.request.json)
+def image(image):
+    img = flask.request.json
 
 if __name__ == "__main__":
     model = tf.keras.models.load_model("saved_models/dnn.h5")

@@ -9,13 +9,13 @@ function setup() {
 }
 
 function draw() {
-    loadPixels();
     if (mouseIsPressed) {
         fill(0);
         ellipse(mouseX,mouseY,20,20);
     }
     if (pressed){
         pressed = !pressed;
+        loadPixels();
         let img = [];
         for (var y = 0; y < height; y++){
             let row = [];
@@ -26,9 +26,11 @@ function draw() {
             }
             img.push(row);
         }
+        img = pixels;
+        updatePixels();
         httpPost("http://127.0.0.1:5000/send/image", "json", img, () => console.log("success"), () => console.log("failure"));
     }
-    updatePixels();
+    //updatePixels();
 }
 	
 function clearArea() {
