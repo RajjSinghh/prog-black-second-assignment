@@ -2,6 +2,8 @@ import cv2
 import flask
 import numpy as np
 import tensorflow as tf
+import sys
+from numpy import reshape
 from flask import redirect, url_for, request
 
 app = flask.Flask(__name__)
@@ -12,20 +14,27 @@ def serve():
 
 @app.route("/solution/<name>")
 def solution(name):
-    return "Is it a %s " % name
+    return {"result":"Is it a: %s " % name}
 
-@app.route("/send/image", methods=['POST', 'GET'])
+@app.route("/send/image", methods=['POST'])
 def send():
-    if request.method == 'POST':
-        img = flask.request.json
-        model = tf.keras.models.load_model("NeuralNetworkModel")
-        guess = model.predict(img)
-        print(guess)
-        print(model)
-        return redirect(url_for('solution', name = guess))
-    else:
-        return 
-
+    image = request.json
+    image = image["pixels"]
+    print(image, file=sys.stderr)
+    
+    #image = image.reshape((1,28,28,1))
+    #img2 = image["pixels"]
+    model = tf.keras.models.load_model("NeuralNetworkModel")
+    try:
+        tensor = tf.convert_to_tensor(image, dtype=tf.int64)
+        guess = model.predict(tensor)
+        print("FIRST", file=sys.stderr)
+    except:
+        print("SECOND", file=sys.stderr)
+        guess = "I don't know!"
+    
+    return redirect(url_for('solution', name = guess))
+    
 if __name__ == "__main__":
     model = tf.keras.models.load_model("NeuralNetworkModel")
     print(model)
