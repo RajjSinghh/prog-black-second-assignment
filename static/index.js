@@ -16,20 +16,40 @@ function draw() {
     if (pressed){
         pressed = !pressed;
         loadPixels();
+        // let img = [];
+        // for (var y = 0; y < height; y++){
+        //     let row = [];
+        //     for (var x = 0; x < width; x++){
+        //         let index = (x + y * width) * 4;
+        //         let rgb = [pixels[index], pixels[index + 1], pixels[index + 2]];
+        //         row.push(rgb);
+        //     }
+        //     img.push(row);
+        // }
         let img = [];
-        for (var y = 0; y < height; y++){
-            let row = [];
-            for (var x = 0; x < width; x++){
-                let index = (x + y * width) * 4;
-                let rgb = [pixels[index], pixels[index + 1], pixels[index + 2]];
-                row.push(rgb);
+        let time;
+        //while (true){
+           timeZero = Date.now()
+           let x = [];
+           let y = [];
+           let t = [];
+            while (mouseIsPressed){
+              x.push(mouseX);
+              y.push(mouseY);
+              t.push(Date.now() - timeZero);
             }
-            img.push(row);
-        }
-        img = pixels;
+            img.push([x, y, t]);
+            x= [];
+            y = [];
+            z = [];
+        //}
+        
+        //img = pixels;
+        print(img)
         updatePixels();
-        httpPost("http://127.0.0.1:5000/send/image", "json", img, () => console.log("success"), () => console.log("failure"));
-    }
+        httpPost("http://127.0.0.1:5000/send/image", img, (res) => alert("success, ", res), (res) => console.log("failure, ", res));
+        
+        }
     //updatePixels();
 }
 	
