@@ -5,6 +5,7 @@ import tensorflow as tf
 import sys
 from numpy import reshape
 from flask import redirect, url_for, request
+import json
 
 app = flask.Flask(__name__)
 
@@ -21,6 +22,8 @@ def send():
     image = request.json
     image = image["pixels"]
     print(image, file=sys.stderr)
+    with open("test", "w") as file:
+        file.write(json.dumps(image))
     
     #image = image.reshape((1,28,28,1))
     #img2 = image["pixels"]
