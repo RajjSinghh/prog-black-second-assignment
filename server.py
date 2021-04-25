@@ -71,12 +71,13 @@ def send():
     image = request.json
     image = image["pixels"]
     image = vector_to_raster(image)
-    pred = np.argmax(model.predict(np.array([image])))
+    output = model.predict(np.array([image]))
+    pred = np.argmax(output)
     answer = CATEGORIES[pred]
-
-    print(answer)
-    return answer
-    #return redirect(url_for('solution',))
+    body = {
+        "answer" : answer,
+    }
+    return {"body" : body}
     
 if __name__ == "__main__":
     global model

@@ -24,6 +24,17 @@ async function getCategory () {
     }
 }
 
+function showGuess (guess) {
+    let p = document.getElementById("guess");
+
+    const vowels = ["a", "e", "i", "o", "u"];
+    if (vowels.includes(guess[0])){
+        p.innerHTML = `I think you drew an ${guess}`;
+    } else {
+        p.innerHTML = `I think you drew a ${guess}`;
+    }
+}
+
 function setup() {
     let canvas = createCanvas(400,400);
     pixelDensity(1);
@@ -59,7 +70,7 @@ function draw() {
     if (pressed){
         pressed = !pressed;
         data = {"pixels":img}
-        httpPost("http://127.0.0.1:5000/send/image", 'json', data, (res) => alert(res["result"]), (res) => console.log("failure, ", res));
+        httpPost("http://127.0.0.1:5000/send/image", 'json', data, (res) => showGuess(res.body.answer), (res) => console.log("failure, ", res));
         img = [];
         
         }
