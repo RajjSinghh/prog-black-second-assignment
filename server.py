@@ -1,3 +1,4 @@
+import random
 import cv2
 import matplotlib.pyplot as plt
 import flask
@@ -59,9 +60,10 @@ def vector_to_raster(img):
 def serve():
     return flask.render_template("index.html")
 
-@app.route("/solution/<name>")
-def solution(name):
-    return {"result":"Is it a: %s " % name}
+@app.route("/get/category")
+def get_category():
+    CATEGORIES = ["tooth", "hand", "tree", "sun", "rainbow", "alarm clock", "hockey stick", "bear", "eraser"]
+    return {"body" : random.choice(CATEGORIES)}
 
 @app.route("/send/image", methods=['POST'])
 def send():

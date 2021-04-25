@@ -12,6 +12,18 @@ let x = [];
 let y = [];
 let t = [];
 
+async function getCategory () {
+    let targetPara = document.getElementById("target");
+    let category = await fetch("http://127.0.0.1:5000/get/category");
+    category = await category.json();
+    const vowels = ["a", "e", "i", "o", "u"];
+    if (vowels.includes(category.body[0])){
+        targetPara.innerHTML = `Draw an ${category.body}`;
+    } else {
+        targetPara.innerHTML = `Draw a ${category.body}`;
+    }
+}
+
 function setup() {
     let canvas = createCanvas(400,400);
     pixelDensity(1);
