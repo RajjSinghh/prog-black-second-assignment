@@ -133,6 +133,6 @@ def send():
     
 if __name__ == "__main__":
     global model
-    model = tf.keras.models.load_model("saved_models/final.h5")
+    model = tf.keras.models.load_model("final.h5")
     print("Server running...")
     app.run()
