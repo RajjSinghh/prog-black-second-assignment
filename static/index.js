@@ -3,11 +3,8 @@ let pressed = false;
 let timeZero = Date.now();
 let img = [];
 let addToArray = false;
-let xpos = 0;
-let ypos = 0;
 let pixelCoords = [];
 
-let array = [];
 let x = [];
 let y = [];
 let t = [];
@@ -48,11 +45,12 @@ function draw() {
         ellipse(mouseX,mouseY,10,10);
 
         loadPixels();
-        if (!pixelCoords.includes((mouseX.toString()+Math.trunc(mouseY).toString()))){
+        updatedCoords = (mouseX.toString()+Math.trunc(mouseY).toString())
+        if (!pixelCoords.includes(updatedCoords)){
             x.push(mouseX);
             y.push(Math.trunc(mouseY));
             t.push(Date.now() - timeZero); 
-            pixelCoords.push(mouseX.toString()+Math.trunc(mouseY).toString());
+            pixelCoords.push(updatedCoords);
             addToArray = true; }
         updatePixels();
          }
@@ -60,7 +58,6 @@ function draw() {
     if ((!mouseIsPressed )&& addToArray) {
         addToArray = false;
         img.push([x,y,t]);
-        array = [];
         x = [];
         y = [];
         t = [];
@@ -77,7 +74,6 @@ function draw() {
 }
 	
 function clearArea() {
-    // Use the identity matrix while clearing the canvas
     clear();
     c = color(255,255,255)
     fill(c);
