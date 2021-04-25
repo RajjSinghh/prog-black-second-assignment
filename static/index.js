@@ -75,4 +75,5 @@ function clearArea() {
 
 function sendPixels(canvas){
     pressed = !pressed;
+    clearArea();
 }
